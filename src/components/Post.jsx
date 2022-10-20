@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Comment } from './Comment';
 import styles from './Post.module.css';
 
 export function Post() {
@@ -21,7 +22,9 @@ export function Post() {
 
         <p>
           Acabei de subir mais um projeto no meu portifa.
-          É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
+          É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare.
+          {' '}
+          🚀
         </p>
 
         <p>
@@ -48,6 +51,12 @@ export function Post() {
           <button type="submit">Comentar</button>
         </footer>
       </form>
+
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   );
 }
