@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Avatar } from './Avatar';
 import { Comment } from './Comment';
+
 import styles from './Post.module.css';
 
 export function Post() {
@@ -7,7 +9,8 @@ export function Post() {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img src="https://github.com/yuricavalini.png" alt="User cover" />
+          <Avatar src="https://github.com/yuricavalini.png" />
+
           <div className={styles.authorInfo}>
             <strong>Yuri Cavalini</strong>
             <span>Web Developer</span>
