@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { v4 as uuidv4 } from 'uuid';
 
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/esm/locale/pt-BR';
@@ -11,6 +12,12 @@ import { Comment } from './Comment';
 import styles from './Post.module.css';
 
 export function Post({ author, content, publishedAt }) {
+  const [comments, setComments] = useState([
+    'Post muito bacana, hein?!',
+  ]);
+
+  const [newCommentText, setNewCommentText] = useState('');
+
   const publisedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR,
   });
@@ -19,6 +26,17 @@ export function Post({ author, content, publishedAt }) {
     locale: ptBR,
     addSuffix: true,
   });
+
+  function handleCreateNewComment(event) {
+    event.preventDefault();
+
+    setComments((prevState) => [...prevState, newCommentText]);
+    setNewCommentText('');
+  }
+
+  function handleNewCommentChange(event) {
+    setNewCommentText(event.target.value);
+  }
 
   return (
     <article className={styles.post}>
@@ -49,10 +67,15 @@ export function Post({ author, content, publishedAt }) {
         })}
       </div>
 
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
-        <textarea placeholder="Deixe um comentário" />
+        <textarea
+          name="comment"
+          placeholder="Deixe um comentário"
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+        />
 
         <footer>
           <button type="submit">Comentar</button>
@@ -60,9 +83,9 @@ export function Post({ author, content, publishedAt }) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => (
+          <Comment key={uuidv4()} content={comment} />
+        ))}
       </div>
     </article>
   );
