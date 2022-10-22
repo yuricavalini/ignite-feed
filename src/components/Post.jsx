@@ -13,7 +13,7 @@ import styles from './Post.module.css';
 
 export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState([
-    'Post muito bacana, hein?!',
+    { id: uuidv4(), content: 'Post muito bacana, hein?!' },
   ]);
 
   const [newCommentText, setNewCommentText] = useState('');
@@ -30,12 +30,18 @@ export function Post({ author, content, publishedAt }) {
   function handleCreateNewComment(event) {
     event.preventDefault();
 
-    setComments((prevState) => [...prevState, newCommentText]);
+    setComments((prevState) => [...prevState, { id: uuidv4(), content: newCommentText }]);
     setNewCommentText('');
   }
 
   function handleNewCommentChange(event) {
     setNewCommentText(event.target.value);
+  }
+
+  function deleteComment(commentId) {
+    setComments((prevState) => (
+      prevState.filter((comment) => comment.id !== commentId)
+    ));
   }
 
   return (
@@ -84,7 +90,12 @@ export function Post({ author, content, publishedAt }) {
 
       <div className={styles.commentList}>
         {comments.map((comment) => (
-          <Comment key={uuidv4()} content={comment} />
+          <Comment
+            key={comment.id}
+            id={comment.id}
+            content={comment.content}
+            onDeleteComment={deleteComment}
+          />
         ))}
       </div>
     </article>
