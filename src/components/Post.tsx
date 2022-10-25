@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { v4 as uuidv4 } from 'uuid';
 
-import { useState } from 'react';
+import {
+  ChangeEvent, FormEvent, InvalidEvent, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/esm/locale/pt-BR';
@@ -11,7 +13,24 @@ import { Comment } from './Comment';
 
 import styles from './Post.module.css';
 
-export function Post({ author, content, publishedAt }) {
+interface Author {
+  name: string;
+  role: string;
+  avatarUrl: string;
+}
+
+interface Content {
+  type: 'paragraph' | 'link';
+  content: string;
+}
+
+export interface PostProps {
+  author: Author;
+  publishedAt: Date;
+  content: Content[];
+}
+
+export function Post({ author, content, publishedAt }: PostProps) {
   const [comments, setComments] = useState([
     { id: uuidv4(), content: 'Post muito bacana, hein?!' },
   ]);
@@ -27,23 +46,23 @@ export function Post({ author, content, publishedAt }) {
     addSuffix: true,
   });
 
-  function handleCreateNewComment(event) {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
 
     setComments((prevState) => [...prevState, { id: uuidv4(), content: newCommentText }]);
     setNewCommentText('');
   }
 
-  function handleNewCommentChange(event) {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
 
-  function handleNewCommentInvalid(event) {
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity('Esse campo é obrigatório.');
   }
 
-  function deleteComment(commentId) {
+  function deleteComment(commentId: string) {
     setComments((prevState) => (
       prevState.filter((comment) => comment.id !== commentId)
     ));
@@ -55,7 +74,7 @@ export function Post({ author, content, publishedAt }) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src={author.avatarUrl} />
+          <Avatar src={author.avatarUrl} alt="" />
 
           <div className={styles.authorInfo}>
             <strong>{author.name}</strong>
