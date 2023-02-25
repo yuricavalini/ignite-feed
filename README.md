@@ -101,7 +101,7 @@ Main tools used in the construction of the project:
 
 ---
 
-## 🦸 Author
+## 🧑🏻‍💻 Author
 
 <div align="center">
   <a href="https://github.com/yuricavalini">
