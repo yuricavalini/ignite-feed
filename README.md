@@ -57,7 +57,7 @@ This is a frontend project.
 
 Before starting, you will need to have the following tools installed on your machine:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
-Also it's nice to have an editor to work with the code like [VSCode](https://code.visualstudio.com/)
+Also it's nice to have an editor to work with the code like [VSCode](https://code.visualstudio.com/).
 
 #### 🧭 Running the web application (Frontend)
 
