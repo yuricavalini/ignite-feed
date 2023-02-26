@@ -128,6 +128,6 @@ Main tools used in the construction of the project:
 
 ## 📝 License
 
-This project is licensed [MIT](./LICENSE).
+This project is licensed under the [MIT](./LICENSE) license.
 
 Made with ❤️ by Yuri Cavalini 👋🏻 [Entre em contato!](https://www.linkedin.com/in/yuricavalini/)
