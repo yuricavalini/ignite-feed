@@ -64,7 +64,7 @@ Also it's nice to have an editor to work with the code like [VSCode](https://cod
 ```bash
 
 # Clone this repository
-$ git clone git@github.com:yuricavalini/ignite-feed.git
+$ git clone https://github.com/yuricavalini/ignite-feed.git
 
 # Access the project folder in your terminal/cmd
 $ cd ignite-feed
